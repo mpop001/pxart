@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ar">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" href="style.css">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Changa&display=swap" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.js" integrity="sha512-wUa0ktp10dgVVhWdRVfcUO4vHS0ryT42WOEcXjVVF2+2rcYBKTY7Yx7JCEzjWgPV+rj2EDUr8TwsoWF6IoIOPg==" crossorigin="anonymous"></script>
+        <script>
+            window.onload = function(){
+                window.setTimeout(function(){
+                     document.querySelector('div.loading-page').style.display='none'; 
+                },500)
+            }
+        </script>
+    </head>
+    <body>
+        <div class='mybody'>
+        <div class="loading-page" >
+            <div class="container">
+        <span></span>
+        <span></span>  
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+            <strong style="text-shadow: none;" >انتظر من فضلك ...</strong>
+            </div>
+            </div>
+        <div class="web-page">
+        <div class="container">
+        <h1>لعبة تلوين المربعات</h1>
+            <h2>اختر حجم اللعبة </h2>
+            <form id='myform'>
+            <lable for='car-height'>عدد مربعات الارتفاع </lable>
+            <input type="number" required id='car-height' name="car-height" min='0' max='94' placeholder="ادخل رقم"  autofocus />
+            <lable for='car-width'>عدد مربعات العرض </lable>
+            <input type="number" id='car-width' name="car-width" min='0' max='94' placeholder="ادخل رقم" required />
+                <br>
+            <input type="submit" value='إرسم' id='btn'/>
+                
+        </form>
+            <lable>اختر اللون الذي تريد تلوين به</lable>
+              <input type="color" id='my-color'  />
+            </div>
+        
+        <div id='table-content' class="table-margin">
+            <div id='important' class="important"><h3>مرحبا في لعبة تلوين المربعات  </h3>
+                <strong> يمكنك أن ترسم أشكال عديدة وتقوم بتنزيلها على صيغة jpeg</strong>
+                <h3>كيفية اللعب</h3>
+                <strong> تقوم باختيار عدد مربعات في الأعلى ثم تضغط على إرسم </strong>
+                <br>
+                <strong>سيظهر لك مربع داخله عديد من المربعات اختر اللون ولون المربعات</strong>
+                <br>
+                <strong>يمكنك تلوين بعديد من اللوان في نفس الوقت</strong>
+                <h3>ملاحظة:</h3>
+                <strong>في حالة إذا أردت نزع اللون في أحد مربعات</strong>
+                <br>
+                <strong class="dblclick-phone">إضغط على لون الشفاف ثم لون به</strong>
+                <strong class='dblclick'>إضغط مرتين على الفأرة</strong>
+            </div>
+            <div id='screen' style=>
+        <table id='red' style='transition: all 2s ease;'></table>
+        </div>
+        </div>
+         
+        <div id='choiseback' class="choise-back" style="display: none">
+            <h3>إختر لون الخلفية</h3>
+            <div>
+            <input type='color' id='backcolor' oninput="changeBack()">
+            <button  onclick="removeBack()" on>انزع الخلفية</button>
+                <button  onclick="myNewcolor()" class="myphone">لون الشفاف</button>
+                <button  onclick="myNewcolor2()" class="myphone" >ارجاع الوان </button>
+            </div>
+        </div>
+        <button id='download' class="mybutton"  style='display:none' onclick="downloadtable()">تحميل الصورة</button>
+       <footer><p>جميع الحقوق محفوظ لدى Mfk  &copy;2021 </p></footer>
+            </div>
+            </div>
+      <script src='game.js'></script>
+        <script>
+            function downloadtable() {
+
+        var node = document.getElementById('screen');
+        domtoimage.toPng(node)
+            .then(function (dataUrl) {
+                var img = new Image();
+                img.src = dataUrl;
+                downloadURI(dataUrl, "MouffokDesign.jpg")
+            })
+            .catch(function (error) {
+                console.error('oops, something went wrong!', error);
+            });
+
+    }
+    function downloadURI(uri, name) {
+        var link = document.createElement("a");
+        link.download = name;
+        link.href = uri;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        delete link;
+    }
+        </script>
+        
+
+    </body>
+</html>
